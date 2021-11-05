@@ -3,6 +3,7 @@ import java.util.List;
 
 public class StringCalculator{
     public int calc(String exp) {
+        exp = exp.replaceAll("\n", ",");
         String [] numbers = exp.split(",");
         List<Integer> list = new ArrayList<>();
         for(String s : numbers) {
