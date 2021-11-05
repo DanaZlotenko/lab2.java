@@ -25,11 +25,14 @@ public class StringCalculator{
         List<Integer> negativeNumbers = new ArrayList<>();
         for(String s : numbers) {
             int number = Integer.parseInt(s);
-            if(number < 0) {
+            if(number < 0)
                 negativeNumbers.add(number);
-            } else {
-                resultList.add(Integer.parseInt(s));
+            else if(number > 1000) {
+
             }
+            else
+                resultList.add(Integer.parseInt(s));
+
         }
         if(!negativeNumbers.isEmpty()) {
             throw new RuntimeException("Negative numbers in the expression: " + negativeNumbers);
