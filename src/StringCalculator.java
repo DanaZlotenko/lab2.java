@@ -14,18 +14,23 @@ public class StringCalculator{
         if(exp.startsWith("//")) {
             //getting first line
             input = Arrays.asList(exp.split("\n"));
-            //putting parsed delimiter in delimiters list
-            delimiters.add(input.get(0).replaceAll("//", ""));
+            //checking if we have multiple delimiters / delimiters with multiple characters
+            if(input.get(0).contains("[")) {
+                //putting 1 line with delimiters in allDelimiters var
+                String allDelimiters = input.get(0);
+                //parsing it
+                allDelimiters = allDelimiters.replaceAll("//", "");
+                //putting different delimiters in array
+                String[] delPatterns = allDelimiters.split("]");
+                for (String s : delPatterns) {
+                    s = s.replaceAll("\\[", "");
+                    //getting delimiter pattern
+                    delimiters.add(Character.toString(s.charAt(1)));
+                }
+            }
             //removing first line with custom delimiter
             exp = exp.substring(exp.indexOf('\n')+1);
             //in case of multiple characters
-            if(delimiters.get(1).contains("[") && delimiters.get(1).contains("]")) {
-                //removing brackets
-                delimiters.set(1, delimiters.get(1).replaceAll("\\[", ""));
-                delimiters.set(1, delimiters.get(1).replaceAll("\\]", ""));
-                //getting patter of delimiter
-                delimiters.set(1, Character.toString(delimiters.get(1).charAt(0)));
-            }
         }
 
         //replacing all delimiter variations with one ',' sign
